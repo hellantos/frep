@@ -1,4 +1,4 @@
-nname: Build Sphinx
+name: Build Sphinx
 
 # Controls when the workflow will run
 on:
