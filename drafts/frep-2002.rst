@@ -1,0 +1,147 @@
+.. _frep-2002:
+
+FREP 2002 - Driver interface for industrial manipulators
+========================================================
+
+.. sidebar:: 
+    :name: Document details
+
+    | **Author**: Christoph Hellmann Santos
+    | **Version**: 0.1
+    | **Status**: Draft
+    | **Type**: Specification
+    | **Created**: 2021-03-01
+
+.. contents:: Document contents
+   :depth: 4
+   :backlinks: top
+
+
+Abstract
+--------
+This specification details the interface a robot driver must provide
+to be considered a FREP robot driver. It is intended to be
+used as a reference for developers implementing new or adapting existing drivers, and as a
+basis for testing existing drivers.
+
+Motivation
+----------
+In order to create truely interoperable robot drivers, these need to
+follow a common interface. This specification defines the minimal
+interface a user should expect.
+
+Definitions
+-----------
+
+
+Launch File Interface
+---------------------
+This section describes the minimal requirements for the launch file
+of a robot driver. As native drivers often do not require a launch file
+called by the user, this section is not mandatory for native drivers.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Optional
+    | **non-native drivers**: Mandatory
+
+
+Launch file naming convention (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The robot driver should offer a launch file that follows the naming
+convention ``<robot_name>.launch.py``.
+
+Launch file arguments (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The robot driver shall implement the same launch file arguments as described
+in :ref:`frep-2001`.
+
+ROS interface overview
+----------------------
+
+.. drawio-figure:: figures/robot-interface.drawio
+    :align: center
+    
+    The minimal interface for a driver for a controlled device.
+
+
+Publisher Interface
+-------------------
+The robot driver shall implement the same service interface as described
+in :ref:`frep-2001`.
+In addition, the robot driver should implement at least the following publishers.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Mandatory
+    | **non-native drivers**: Mandatory
+
+
+Joint state Publisher (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The robot driver should publish the joint state of the robot using the
+``sensor_msgs/msg/JointState`` message type. This needs to be possible with
+at least 100 Hz. Lower frequencies are allowed to be configurable.
+
+.. csv-table:: 
+    :header: Characteristic, Value
+    :delim: |
+
+    Name | ``<robot_name>/joint_states``
+    Type | ``sensor_msgs/msg/JointState``
+    Frequency | 100 Hz
+
+Service interface
+-----------------
+The robot driver shall implement the same service interface as described
+in :ref:`frep-2001`.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Mandatory
+    | **non-native drivers**: Mandatory
+
+
+Action Interface
+----------------
+
+The robot driver should implement at least the following action servers.
+If the namespace argument to the launch file is set to true, the
+action servers' names shall be prefixed the robot name.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Mandatory
+    | **non-native drivers**: Mandatory
+
+Follow joint trajectory action (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The robot driver should accept commands to move the robot through a joint 
+follow_joint_trajectory action. The action server should be named
+``<robot_name>/<robot_name>_joint_trajectory_controller/follow_joint_trajectory`` and use the
+``control_msgs/action/FollowJointTrajectory`` action type.
+
+.. csv-table:: 
+    :header: Characteristic, Value
+    :delim: |
+
+    Name | ``<robot_name>/<robot_name>_joint_trajectory_controller/follow_joint_trajectory``
+    Type | ``control_msgs/action/FollowJointTrajectory``
+
+
+Open Points
+^^^^^^^^^^^
+
+* Do we require the robot driver to make follow_joint_trajectory available
+  once it starts up? For ros2_control drivers we can simply load the appropriate
+  controller, but what about other drivers? I suppose this could be solved by
+  a service we require, that will activate the action server. For ros2_control
+  drivers a general node could be used to supply that service.
+
+
+This document has been placed in the public domain.
+
+

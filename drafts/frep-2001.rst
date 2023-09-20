@@ -1,0 +1,194 @@
+.. _frep-2001:
+
+FREP 2001 - Basic driver interface for controlled devices
+===========================================================
+
+.. sidebar:: 
+    :name: Document details
+
+    | **Author**: Christoph Hellmann Santos
+    | **Version**: 0.1
+    | **Status**: Draft
+    | **Type**: Specification
+    | **Created**: 2021-03-01
+
+.. contents:: Document contents
+   :depth: 4
+   :backlinks: top
+
+
+Abstract
+--------
+This specification details the interface a driver for controlled devices must provide
+to be considered a FREP device driver. It is intended to be
+used as a reference for developers implementing new or adapting existing drivers, and as a
+basis for testing existing drivers.
+
+Motivation
+----------
+Device drivers in the ROS ecosystem come in different implementations.
+Some use ros2_control and some use their own implementation for 
+controlling the device. This document aims to define a basic
+interface that all drivers for controlled devices should implement to ensure a high
+degree of interoperability between different device drivers.
+
+Definitions
+-----------
+
+.. glossary:: 
+
+    controlled device
+        A device that is supposed to be controlled by the a ROS based system.
+    
+    driver
+        A software component that is used to communicate with a device.
+
+    native driver
+        A ROS driver that runs directly on the controlled device.
+    
+    non-native driver
+        A ROS driver that runs on a different device than
+        the controlled device.
+
+Launch File Interface
+---------------------
+This section describes the minimal requirements for the launch file
+of a device driver. As native drivers often do not require a launch file
+called by the user, this section is not mandatory for native drivers.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Optional
+    | **non-native drivers**: Mandatory
+
+Launch file naming convention (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The robot driver should offer a launch file that follows the naming
+convention ``<robot_name>.launch.py``. 
+
+Launch file arguments (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The launch file shall accept the at least the arguments listed in this section.
+When these arguments are passed to the launch file, the driver should be able
+to start without any further user interaction.
+
+.. csv-table::
+    :header: Argument, Type, Description, Applicability
+    :delim: |
+    
+    ``name`` | String | Name of the robot | M
+    ``description_package`` | String | Name of the package that contains the robot description | O
+    ``description_file`` | String | Name of the robot description file to be used with the driver | O 
+    ``namespace`` | Bool | Prefix nodes and joint names with robot name [2]_ | M 
+    ``runtime_config_package`` | Bool | The package that contains the configuration files required by the robot driver. | O [1]_
+
+.. [1] *This is optional if the driver does not require any configuration files.*
+.. [2] *It is okay to provide other namespacing and prefixing mechanisms. However, if this argument
+        is set to true, the driver should use the robot name as joint_prefix and namespace
+        and disregard any other namespacing and prefixing mechanisms.*
+
+Analysis of existing drivers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The followinf table shows how existing drivers have currently designed their
+launch files. It does not seem to difficult to adapt the existing launch files
+to the proposed interface.
+
+.. csv-table::
+    :header: Driver, Launch file name, name, description_pkg, description_file, namespace, config_pkg
+    :delim: |
+    :widths: 50,10,10,10,10,10,10
+
+    ur_robot_driver   | Yes | No  | Yes | Yes | No [3]_ | Yes
+    motoros2 [4]_     | No  | No  | No  | No  | No | No
+    franka_ros2       | Yes | No  | No  | No  | No | No
+    abb_ros2          | Yes | No  | Yes | Yes | No [3]_ | Yes 
+
+.. [3] *Prefixing or namespacing is foreseen, but not implemented linked with the robot name.*.
+.. [4] *The driver does not require a separate launchfile to start. The information usually passed to the launch file is stored as YAML configuration file on the robot controller.*
+
+
+
+ROS interface overview
+----------------------
+
+.. drawio-figure:: figures/device-interface.drawio
+    :align: center
+    
+    The minimal interface for a driver for a controlled device.
+
+Service Interface
+-----------------
+
+This section describes the minimal requirments for the service
+interface of a device driver.
+
+    .. admonition:: Applicability
+
+        | **native drivers**: Mandatory
+        | **non-native drivers**: Mandatory
+
+Operation transition trigger service (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The device driver shall offer a service that enables the user to trigger
+transitions of the devices operational state machine. The service shall
+be available under ``<device_name>/set_operation_state``.
+
+.. csv-table:: Request
+    :header: "Data", "Description"
+    :widths: 10, 50
+
+    "transition", "This data is used to define the transition."
+    "configuration", "The name of the configuration to be used for the transition."
+
+.. csv-table:: Response
+    :header: "Data", "Description"
+    :widths: 10, 50
+
+    "success", "This data is used to indicate if the transition was successful."
+    "state", "The state the device has transitioned to."
+
+.. csv-table:: 
+    :header: Characteristic, Value
+    :delim: |
+
+    Name | ``<device_name>/set_operation_state``
+    Type | ``frep_device_msgs/srv/OperationTransition``
+    Frequency | event_driven
+
+
+Publisher Interface
+-------------------
+The robot driver should implement at least the following publishers.
+If the namespace argument to the launch file is set to true, the
+publishers' topic names shall be prefixed the robot name.
+
+  .. admonition:: Applicability
+    
+    | **native drivers**: Mandatory
+    | **non-native drivers**: Mandatory
+
+Operational State Publisher (M)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The device driver shall publish the current state of the device to the
+topic ``<device_name>/operation_state``. The message type shall be ``std_msgs/String``.
+
+.. csv-table:: Message
+    :header: "Data", "Description"
+    :widths: 10, 50
+
+    "state", "The state the device is currently in."
+    "configuration", "The name of the configuration that was used to transition to the current state."
+
+.. csv-table:: 
+    :header: Characteristic, Value
+    :delim: |
+
+    Name | ``<device_name>/operation_state``
+    Type | ``frep_device_msgs/msg/State``
+    Frequency | event_driven
+
+
+
+

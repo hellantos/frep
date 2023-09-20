@@ -1,0 +1,124 @@
+<mxfile host="65bd71144e">
+    <diagram id="v0Ba6sgLxf055p_ATb5y" name="Page-1">
+        <mxGraphModel dx="1544" dy="821" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="2" value="robot_1" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="110" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="/" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="110" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="6" value="operation_state" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="110" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="Namespace" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;spacingLeft=5;fontColor=#ffffff;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="40" y="80" width="290" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="9" value="Publisher" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;spacingLeft=5;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="340" y="80" width="470" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="10" value="Service" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;spacingLeft=5;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="340" y="210" width="480" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="11" value="set_operation_state" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="240" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="joint_state" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="160" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="13" value="follow_joint_trajectory" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="330" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="Action" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;spacingLeft=5;fontStyle=1" parent="1" vertex="1">
+                    <mxGeometry x="340" y="300" width="470" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="15" value="&amp;lt;robot_name&amp;gt;_joint_trajectoy_controller" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="330" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="16" value="/" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="330" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="&amp;lt;robot_name&amp;gt;_forward_position_controller" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="380" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="/" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="380" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="commands" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="380" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="23" value="&amp;lt;robot_name&amp;gt;_forward_velocity_controller" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="430" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="24" value="/" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="600" y="430" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="commands" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="650" y="430" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="..." style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" parent="1" vertex="1">
+                    <mxGeometry x="340" y="480" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" value="robot_2" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="550" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="28" value="/" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="290" y="550" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="operation_state" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="550" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="set_operation_state" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="680" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" value="joint_state" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="600" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="32" value="follow_joint_trajectory" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="770" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="33" value="Action" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#ffffff;spacingLeft=5;fontStyle=1" vertex="1" parent="1">
+                    <mxGeometry x="340" y="740" width="470" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="34" value="&amp;lt;robot_name&amp;gt;_joint_trajectoy_controller" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="770" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="35" value="/" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="770" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="36" value="&amp;lt;robot_name&amp;gt;_forward_position_controller" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="820" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="37" value="/" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="820" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="38" value="commands" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="820" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="39" value="&amp;lt;robot_name&amp;gt;_forward_velocity_controller" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="870" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="40" value="/" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="600" y="870" width="40" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="41" value="commands" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="650" y="870" width="160" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="42" value="..." style="rounded=0;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+                    <mxGeometry x="340" y="920" width="250" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="43" value="joint_state" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="1000" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="44" value="tf" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="1050" width="240" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="45" value="tf_static" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+                    <mxGeometry x="40" y="1100" width="240" height="40" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

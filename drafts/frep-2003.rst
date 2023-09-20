@@ -1,0 +1,91 @@
+.. _frep-2003:
+
+FREP 2003 - Operation state manager for controlled devices
+==========================================================
+
+.. sidebar:: 
+    :name: Document details
+
+    | **Author**: Christoph Hellmann Santos
+    | **Version**: 0.1
+    | **Status**: Draft
+    | **Type**: Specification
+    | **Created**: 2021-03-01
+
+.. contents:: Document contents
+   :depth: 4
+   :backlinks: top
+
+
+Abstract
+--------
+This specification details how the operation state manager for controlled
+devices should be implemented. The operation state manager specificaiton is a simple
+compatability layer for managing the state of controlled devices, independent
+of the underlying control system.
+
+Motivation
+----------
+In order to create truely interoperable device drivers, the operation
+state of the drivers needs to be managed in a uniform way.
+
+Definitions
+-----------
+
+
+Interface Description
+---------------------
+
+TBD
+
+
+Behavior Description
+----------------------
+In order to enable interoperability between different device drivers,
+the device drivers should implement a common state machine for communication
+and switching of the devices operational state.
+
+.. drawio-figure:: figures/device-state.drawio
+    :align: center
+    
+    Operation state machine
+
+
+.. csv-table:: States
+    :header: "State", "Description"
+    :widths: 10, 50
+
+    "Initialising", "The device is not ready to be controlled. This can have different reasons e.g. the connection the device is not yet established, the device is booting up, ..."
+    "Ready", "The device is ready to be controlled."
+    "Controlled", "The device is currently being controlled."
+    "Error", "The device is currently not being controlled and is in an error state."
+    "Recovering", "The device is currently recovering from an error."
+    "Shutdown", "The device is shutting down."
+
+.. csv-table:: Triggered Transitions
+    :align: center
+    :header: "Transition", "Description"
+    :widths: 10, 50
+
+    "1", "Triggering control of the device."
+    "2", "Triggering release of control of the device."
+    "3", "Triggering shutdown of the device."
+    "4", "Triggering recovery of the device."
+    "5", "Triggering hot configuration switch of the device."
+
+
+**Initialising**:
+In the state intialising the operation manager waits for other components to become
+available and ready. This can be the connection to the device, the hardware interface,
+controllers and other things. The initialising state is left as soon as all required 
+components are ready.
+
+**Ready**:
+In the ready state the device waits for a trigger to switch to another state. The state
+actively monitors the availability of the required components and switches automatically
+to the error state if one of the necessary components becomes unavailable.
+
+**Controlled**:
+In the controlled state, the device is controlled. The operation manager monitors
+the availability of the required components and switches automatically
+to the error state if one of the necessary components becomes unavailable.
